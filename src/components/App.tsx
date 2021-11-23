@@ -1,15 +1,5 @@
-import axios from "axios"
-import { useEffect, useState } from "react"
 import styled from "styled-components"
 import BrowserEmulator from "./BrowserEmulator"
-
-type ContactInfo = {
-    discord: string,
-    mail: string,
-    twitter: string,
-    github: string,
-    linkedIn: string
-}
 
 const PageContainer = styled.div`
     display: flex;
