@@ -122,7 +122,7 @@ const ContactLine = ({ data, value, href }: { data: string, value: string, href:
     return (
         <ContactLineContainer>
             <span>"{ data }"</span>
-            <span>:</span>
+            <span>: </span>
             <ContactLineLink href={data === "mail" ? `mailto:${href}` : href.startsWith("http") ? href : "#"} target="_blank">"{ value }"</ContactLineLink>
         </ContactLineContainer>
     )
