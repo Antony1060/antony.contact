@@ -83,7 +83,7 @@ const BrowserContentContainer = styled.div`
 const JsonFormat = styled.div`
     display: flex;
     flex-direction: column;
-    font-size: 1.6rem;
+    font-size: 1.4rem;
     color: white;
 
     & * {
@@ -123,7 +123,7 @@ const ContactLine = ({ data, value, href }: { data: string, value: string, href:
         <ContactLineContainer>
             <span>"{ data }"</span>
             <span>: </span>
-            <ContactLineLink href={data === "mail" ? `mailto:${href}` : href.startsWith("http") ? href : "#"} target="_blank">"{ value }"</ContactLineLink>
+            <ContactLineLink href={data === "mail" ? `mailto:${href}` : href.startsWith("http") ? href : data === "discord" ? "https://discord.gg/tgHWHWtNeD" : "#"} target="_blank">"{ value }"</ContactLineLink>
         </ContactLineContainer>
     )
 }
