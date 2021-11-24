@@ -1,0 +1,18 @@
+name: "Deploy"
+
+on:
+  push:
+    branches:
+      - "master"
+
+jobs:
+  deploy:
+    name: "🚚 Deploy"
+    runs-on: "ubuntu-latest"
+    steps:
+      - name: "Checkout code"
+        uses: "actions/checkout@v2"
+      - name: "Setup SSH keys"
+        run: "mkdir -p ~/.ssh && echo '${{ secrets.SERVER_PRIVATE_KEY }}' > ~/.ssh/id_rsa && chmod 0600 ~/.ssh/id_rsa"
+      - name: "Upload to server"
+        run: "ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null root@${{ secrets.SERVER_IP }} -f '~/start_scripts/contact_pull.sh'"
