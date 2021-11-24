@@ -1,4 +1,5 @@
-import { faLock, faRedo, faStar } from "@fortawesome/free-solid-svg-icons";
+import { faLock, faRedo, faStar as solidStar } from "@fortawesome/free-solid-svg-icons";
+import { faStar as regularStar } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from "axios";
 import { useEffect, useState } from "react";
@@ -61,10 +62,12 @@ const BarContainer = styled.div`
 
 const UrlBadge = styled.div`
     width: 2rem;
+    height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
     cursor: pointer;
+    user-select: none;
 `
 
 const Url = styled.div`
@@ -78,6 +81,12 @@ const BrowserContentContainer = styled.div`
     background-color: #292727;
     min-height: 400px;
     padding: 1rem;
+    transition: 200ms linear;
+
+    @media (max-width: 900px) {
+        min-height: 360px;
+        transition: 200ms linear;
+    }
 `
 
 const JsonFormat = styled.div`
@@ -85,6 +94,7 @@ const JsonFormat = styled.div`
     flex-direction: column;
     font-size: 1.4rem;
     color: white;
+    transition: 200ms linear;
 
     & * {
         font-family: monospace;
@@ -92,6 +102,7 @@ const JsonFormat = styled.div`
 
     @media (max-width: 900px) {
         font-size: 1rem;
+        transition: 200ms linear;
     }
 `
 
@@ -107,6 +118,10 @@ const ContactLineContainer = styled.div`
     span:first-child {
         color: #93d0f0;
     }
+
+    span:nth-child(3) {
+        color: #cb8f76;
+    }
 `
 
 const ContactLineLink = styled.a`
@@ -118,18 +133,37 @@ const ContactLineLink = styled.a`
     }
 `
 
-const ContactLine = ({ data, value, href }: { data: string, value: string, href: string }) => {
+const ContactLine = ({ keyName, value, href }: { keyName: string, value: string, href: string }) => {
+    const overwriteHref: { [k: string]: string } = {
+        mail: `mailto:${href}`,
+        discord: "https://discord.gg/tgHWHWtNeD"
+    }
+
     return (
         <ContactLineContainer>
-            <span>"{ data }"</span>
-            <span>: </span>
-            <ContactLineLink href={data === "mail" ? `mailto:${href}` : href.startsWith("http") ? href : data === "discord" ? "https://discord.gg/tgHWHWtNeD" : "#"} target="_blank">"{ value }"</ContactLineLink>
+            <span>&quot;{ keyName }&quot;</span>
+            <span>&#58; </span>
+            <span>
+                &quot;
+                <ContactLineLink href={overwriteHref[keyName] ?? (href.startsWith("http") ? href : "#")} target="_blank">{ value }</ContactLineLink>
+                &quot;
+            </span>
         </ContactLineContainer>
     )
 }
 
+const LandspaceWarning = styled.div`
+    display: none;
+
+    @media(max-width: 640px) {
+        display: unset;
+    }
+`
+
 const BrowserEmulator = () => {
     const [ contact, setContact ] = useState<ContactInfo | null>(null);
+
+    const [ favorite, setFavorite ] = useState(true);
 
     const fetchContacts = () => {
         setContact(null);
@@ -142,8 +176,14 @@ const BrowserEmulator = () => {
 
     useEffect(() => {
         fetchContacts();
+        const pageFavorited = localStorage.getItem("pageFavorited");
+        setFavorite(!pageFavorited ? true : pageFavorited === "true"); // default to true
     }, []);
 
+    useEffect(() => {
+        localStorage.setItem("pageFavorited", `${favorite}`)
+    }, [favorite])
+    
     return (
         <BrowserContainer>
             <SearchContainer>
@@ -159,7 +199,7 @@ const BrowserEmulator = () => {
                         <span>antony.contact</span>
                     </Url>
                     <UrlBadge>
-                        <FontAwesomeIcon icon={faStar} />
+                        <FontAwesomeIcon icon={favorite ? solidStar : regularStar} onClick={(e) => setFavorite(f => !f)}/>
                     </UrlBadge>
                 </BarContainer>
             </SearchContainer>
@@ -170,12 +210,13 @@ const BrowserEmulator = () => {
                         <JsonContent>
                             {Object.entries(contact)
                                 .filter(([ k ]) => k !== "status")
-                                .map(([ k, v ]) => <ContactLine key={k} data={k} value={v} href={v} />)}
+                                .map(([ k, v ]) => <ContactLine key={k} keyName={k} value={v} href={v} />)}
                         </JsonContent>
                         <span>&#125;</span>
                     </JsonFormat>
                 }
             </BrowserContentContainer>
+            <LandspaceWarning style={{ color: "#de5959" }}>Switch to landscape mode for a better view</LandspaceWarning>
         </BrowserContainer>
     )
 }
