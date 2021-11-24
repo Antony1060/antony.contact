@@ -1,5 +1,6 @@
 import styled from "styled-components"
 import BrowserEmulator from "./BrowserEmulator"
+import Navbar from "./Navbar"
 
 const PageContainer = styled.div`
     display: flex;
@@ -18,7 +19,7 @@ const ContentContainer = styled.div`
     width: 1000px;
     max-width: 100vw;
     gap: 2rem;
-    padding: 4rem 2rem;
+    padding: 2rem;
     text-align: center;
     text-align: start;
 `
@@ -27,6 +28,7 @@ const App = () => {
     return (
         <PageContainer>
             <ContentContainer>
+                <Navbar />
                 <BrowserEmulator />
             </ContentContainer>
         </PageContainer>

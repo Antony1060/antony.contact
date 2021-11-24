@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import styled from "styled-components";
+import pgpKey from "url:/assets/antony.asc"
 
 type ContactInfo = {
     discord: string,
@@ -61,13 +62,14 @@ const BarContainer = styled.div`
 `
 
 const UrlBadge = styled.div`
+    position: relative;
     width: 2rem;
     height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
-    cursor: pointer;
     user-select: none;
+    cursor: pointer;
 `
 
 const Url = styled.div`
@@ -160,10 +162,65 @@ const LandspaceWarning = styled.div`
     }
 `
 
+const HTTPSPopup = styled.div<{ $active: boolean }>`
+    position: absolute;
+    cursor: auto;
+    top: 2rem;
+    left: 0;
+    width: 300px;
+    height: fit-content;
+    background-color: #423f3f;
+    padding: 1rem;
+    display: ${p => p.$active ? 'flex' : 'none'};
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 0.4rem;
+    font-size: 1rem;
+
+    span {
+        padding: 0 0.4rem;
+    }
+
+    span:first-child {
+        font-size: 1.1rem;
+        color: rgba(103, 185, 137, 0.8);
+    }
+`
+
+const DividerContainer = styled.div`
+    display: flex;
+    width: 100%;
+    justify-content: stretch;
+    align-items: center;
+`
+
+const DividerLine = styled.div`
+    height: 1px;
+    background-color: #575454;
+    flex-grow: 1;
+`
+
+const Divider = () => {
+    return <DividerContainer><DividerLine /></DividerContainer>
+}
+
+const PGPKey = styled.a`
+    color: rgba(255, 255, 255, 0.8);
+    margin-left: 1rem;
+    cursor: pointer;
+    text-decoration: none;
+
+    &:hover {
+        color: rgba(255, 255, 255, 0.9);
+        text-decoration: underline;
+    }
+`
+
 const BrowserEmulator = () => {
     const [ contact, setContact ] = useState<ContactInfo | null>(null);
-
     const [ favorite, setFavorite ] = useState(true);
+    const [ httpsPopupActive, setHttpsPopupActive ] = useState(false);
 
     const fetchContacts = () => {
         setContact(null);
@@ -181,9 +238,18 @@ const BrowserEmulator = () => {
     }, []);
 
     useEffect(() => {
+        const closePopup = () => setHttpsPopupActive(false);
+
+        document.body.addEventListener("click", closePopup)
+        return () => {
+            document.body.removeEventListener("click", closePopup);
+        }
+    }, [])
+
+    useEffect(() => {
         localStorage.setItem("pageFavorited", `${favorite}`)
     }, [favorite])
-    
+
     return (
         <BrowserContainer>
             <SearchContainer>
@@ -191,15 +257,27 @@ const BrowserEmulator = () => {
                     <FontAwesomeIcon icon={faRedo} size="sm" style={{ color: "rgba(255, 255, 255, 0.8)" }} />
                 </BoxButton>
                 <BarContainer>
-                    <UrlBadge>
+                    <UrlBadge onClick={(e) =>{
+                        e.stopPropagation();
+                        setHttpsPopupActive(a => !a)
+                    }}>
                         <FontAwesomeIcon icon={faLock} size="sm" style={{ color: "rgba(103, 185, 137, 0.8)" }} />
+                        <HTTPSPopup $active={httpsPopupActive} onClick={(e) => e.stopPropagation()}>
+                            <span>Connection is secure</span>
+                            <Divider />
+                            <span>PGP Key:</span>
+                            <PGPKey href={pgpKey}>
+                                6610 E043 1CCB 318A 5DCC <br />
+                                38C2 0A44 433B DEEB 62D8
+                            </PGPKey>
+                        </HTTPSPopup>
                     </UrlBadge>
                     <Url>
                         <span>https://</span>
                         <span>antony.contact</span>
                     </Url>
                     <UrlBadge>
-                        <FontAwesomeIcon icon={favorite ? solidStar : regularStar} onClick={(e) => setFavorite(f => !f)}/>
+                        <FontAwesomeIcon icon={favorite ? solidStar : regularStar} onClick={() => setFavorite(f => !f)}/>
                     </UrlBadge>
                 </BarContainer>
             </SearchContainer>
