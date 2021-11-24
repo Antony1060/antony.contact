@@ -24,12 +24,23 @@ const ContentContainer = styled.div`
     text-align: start;
 `
 
+const Version = styled.a`
+    text-decoration: none;
+    color: rgba(255, 255, 255, 0.8);
+    cursor: pointer;
+    &:hover {
+        color: white;
+        text-decoration: underline;
+    }
+`
+
 const App = () => {
     return (
         <PageContainer>
             <ContentContainer>
                 <Navbar />
                 <BrowserEmulator />
+                <Version>Verison {process.env.COMMIT_REF?.substring(0, 7) ?? 'development'}</Version>
             </ContentContainer>
         </PageContainer>
     )

@@ -5,7 +5,7 @@
   "scripts": {
     "start": "parcel src/index.html --port 3000",
     "prebuild": "rm -rf dist/",
-    "build": "parcel build src/index.html"
+    "build": "COMMIT_REF=$(git show -s --format=%h) parcel build src/index.html"
   },
   "browserslist": {
     "production": [
