@@ -40,7 +40,7 @@ const App = () => {
             <ContentContainer>
                 <Navbar />
                 <BrowserEmulator />
-                <Version>Verison {process.env.COMMIT_REF?.substring(0, 7) ?? 'development'}</Version>
+                <Version href="https://github.com/Antony1060/antony.contact">Verison {process.env.COMMIT_REF?.substring(0, 7) ?? 'development'}</Version>
             </ContentContainer>
         </PageContainer>
     )
