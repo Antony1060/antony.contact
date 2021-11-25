@@ -1,5 +1,5 @@
 import styled from "styled-components"
-import BrowserEmulator from "./BrowserEmulator"
+import BrowserEmulator from "./browser/BrowserContainer"
 import Navbar from "./Navbar"
 
 const PageContainer = styled.div`
