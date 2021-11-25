@@ -50,6 +50,10 @@ const BoxButton = styled.button`
         transform: rotateZ(360deg);
         transition: transform 200ms linear;
     }
+
+    @media print {
+        display: none;
+    }
 `
 
 const BarContainer = styled.div`
@@ -59,6 +63,10 @@ const BarContainer = styled.div`
     display: flex;
     justify-content: flex-start;
     align-items: center;
+
+    @media print {
+        display: none;
+    }
 `
 
 const UrlBadge = styled.div`
@@ -106,6 +114,7 @@ const JsonFormat = styled.div`
         font-size: 1rem;
         transition: 200ms linear;
     }
+
 `
 
 const JsonContent = styled.div`

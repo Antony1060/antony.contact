@@ -28,9 +28,14 @@ const Version = styled.a`
     text-decoration: none;
     color: rgba(255, 255, 255, 0.8);
     cursor: pointer;
+    
     &:hover {
         color: white;
         text-decoration: underline;
+    }
+
+    @media print {
+        display: none;
     }
 `
 
