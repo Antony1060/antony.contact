@@ -68,6 +68,10 @@ const ContactLineDetailsContainer = styled.div`
 `
 
 const ContactLineDetails: FC<ContactLineDetailsProps> = ({ title, description }) => {
+    // if we're not in development, don't show this element
+    // this is not yet ready for the public since the data is hard-coded
+    if(process.env.COMMIT_REF) return (<div></div>)
+
     return (
         <ContactLineDetailsContainer>
             <span>{title}</span>
