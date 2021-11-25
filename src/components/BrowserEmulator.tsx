@@ -5,6 +5,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import styled from "styled-components";
 import pgpKey from "url:/assets/antony.asc"
+import sshKey from "url:/assets/antony.pub"
 
 type ContactInfo = {
     discord: string,
@@ -214,7 +215,7 @@ const Divider = () => {
     return <DividerContainer><DividerLine /></DividerContainer>
 }
 
-const PGPKey = styled.a`
+const PublicKey = styled.a`
     color: rgba(255, 255, 255, 0.8);
     margin-left: 1rem;
     cursor: pointer;
@@ -275,10 +276,17 @@ const BrowserEmulator = () => {
                             <span>Connection is secure</span>
                             <Divider />
                             <span>PGP Key:</span>
-                            <PGPKey href={pgpKey}>
+                            <PublicKey href={pgpKey}>
                                 6610 E043 1CCB 318A 5DCC <br />
                                 38C2 0A44 433B DEEB 62D8
-                            </PGPKey>
+                            </PublicKey>
+
+                            <span>SSH Key:</span>
+                            <PublicKey href={sshKey}>
+                                SHA256: <br />
+                                CdyFKxQHvYw0y/l5uq4FFU <br />
+                                ipIPDLdKzGy/PV6Jv99sM
+                            </PublicKey>
                         </HTTPSPopup>
                     </UrlBadge>
                     <Url>
