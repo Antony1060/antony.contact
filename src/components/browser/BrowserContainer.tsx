@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import styled from "styled-components";
-import { ContactInfo } from "../../types/ContactInfo.type";
+import { ContactInfo } from "../../types/ContactInfo";
 import ContactLine from "./elements/ContactLine";
 import { JsonContent, JsonFormat } from "./elements/JsonFormat";
 import SearchBar from "./elements/SearchBar";
@@ -17,8 +17,6 @@ const BrowserContainer = styled.div`
     gap: 6px;
 `
 
-
-
 const BrowserContentContainer = styled.div`
     background-color: #292727;
     min-height: 400px;
@@ -31,10 +29,6 @@ const BrowserContentContainer = styled.div`
     }
 `
 
-
-
-
-
 const LandspaceWarning = styled.div`
     display: none;
 
@@ -42,9 +36,6 @@ const LandspaceWarning = styled.div`
         display: unset;
     }
 `
-
-
-
 
 const BrowserEmulator = () => {
     const [ contact, setContact ] = useState<ContactInfo | null>(null);
@@ -69,8 +60,8 @@ const BrowserEmulator = () => {
                         <span>&#123;</span>
                         <JsonContent>
                             {Object.entries(contact)
-                                .filter(([ k ]) => k !== "status")
-                                .map(([ k, v ]) => <ContactLine key={k} keyName={k as keyof ContactInfo} value={v} href={v} />)}
+                                .filter(([ k ]) => k !== "status" && !k.startsWith("_"))
+                                .map(([ k, v ]) => <ContactLine key={k} keyName={k as keyof ContactInfo} value={v as string} href={v as string} _metadata={contact._metadata} />)}
                         </JsonContent>
                         <span>&#125;</span>
                     </JsonFormat>

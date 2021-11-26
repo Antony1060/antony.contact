@@ -8,7 +8,7 @@ import HTTPSPopup from "./HTTPSPopup"
 import UrlBadge from "./UrlBadge"
 import pgpKey from "url:/assets/antony.asc"
 import sshKey from "url:/assets/antony.pub"
-import { ContactInfo } from "../../../types/ContactInfo.type"
+import { ContactInfo } from "../../../types/ContactInfo"
 import { FC, useEffect, useState } from "react"
 
 const SearchContainer = styled.div`

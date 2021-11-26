@@ -1,6 +1,6 @@
 import { FC } from "react"
 import styled from "styled-components"
-import { ContactInfo } from "../../../types/ContactInfo.type"
+import { ContactInfo, ContactInfoMetadata } from "../../../types/ContactInfo"
 
 const ContactLineContainer = styled.div`
     span:first-child {
@@ -29,8 +29,8 @@ const ContactLineLink = styled.a`
 `
 
 type ContactLineDetailsProps = {
-    imageUrl?: string,
     title: string,
+    descriptionImage?: string,
     description: string
 }
 
@@ -55,6 +55,13 @@ const ContactLineDetailsContainer = styled.div`
         display: none !important;
     }
 
+    span {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        gap: 0.4rem;
+    }
+
     span:first-child {
         font-size: 1.2rem;
         color: #93d0f0;
@@ -67,20 +74,19 @@ const ContactLineDetailsContainer = styled.div`
     }
 `
 
-const ContactLineDetails: FC<ContactLineDetailsProps> = ({ title, description }) => {
-    // if we're not in development, don't show this element
-    // this is not yet ready for the public since the data is hard-coded
-    if(process.env.COMMIT_REF) return (<></>)
-
+const ContactLineDetails: FC<ContactLineDetailsProps> = ({ title, description, descriptionImage }) => {
     return (
         <ContactLineDetailsContainer>
             <span>{title}</span>
-            <span>{description}</span>
+            <span>
+                {descriptionImage && <img src={descriptionImage} style={{ width: "1.4rem" }} />}
+                {description}
+            </span>
         </ContactLineDetailsContainer>
     )
 }
 
-const ContactLine = ({ keyName, value, href }: { keyName: keyof ContactInfo, value: string, href: string }) => {
+const ContactLine = ({ keyName, value, href, _metadata }: { keyName: keyof ContactInfo, value: string, href: string, _metadata: ContactInfoMetadata }) => {
     const overwriteHref: { [k in keyof ContactInfo]?: string } = {
         mail: `mailto:${href}`,
         discord: "https://discord.gg/tgHWHWtNeD"
@@ -89,22 +95,20 @@ const ContactLine = ({ keyName, value, href }: { keyName: keyof ContactInfo, val
     const linkDetails: { [key in keyof ContactInfo]?: ContactLineDetailsProps } = {
         linkedIn: {
             title: "LinkedIn",
-            description: "12 connection"
+            description: `${_metadata.linkedIn.title}`
         },
         twitter: {
-            imageUrl: "https://pbs.twimg.com/profile_images/1462878256613494788/_PpROI0E_400x400.jpg",
             title: "Twitter",
-            description: "20 followers"
+            description: `${_metadata.twitter.followers} followers`
         },
         github: {
-            imageUrl: "https://avatars.githubusercontent.com/u/38852274",
             title: "GitHub",
-            description: "577 contributions in the last year"
+            description: `${_metadata.github.contributions} contributions in the last year`
         },
         discord: {
-            imageUrl: "https://cdn.discordapp.com/avatars/136724729011634176/d53dd32949d8aa1eaae32dbb2f4f5f07.webp",
             title: "Discord",
-            description: "Life is a stack"
+            descriptionImage: _metadata.discord.statusIcon,
+            description: _metadata.discord.status
         }
     }
 
