@@ -1,0 +1,9 @@
+{
+  "name": "parcel-namer",
+  "version": "1.0.0",
+  "main": "./src/Namer.js",
+  "license": "MIT",
+  "engines": {
+    "parcel": "2.x"
+  }
+}
