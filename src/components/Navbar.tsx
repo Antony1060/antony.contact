@@ -62,7 +62,7 @@ const LinkContainer = styled.a`
 const Divider = styled.div`
     width: 100%;
     height: 2px;
-    background: linear-gradient(0.25turn, #464646, #f0f0f0 10%, #f0f0f0 90%, #464646);
+    background: linear-gradient(0.25turn, #0A0D13, #f0f0f0 10%, #f0f0f0 90%, #0A0D13);
 `
 
 const Link = ({ text, href }: { text: string, href: string }) => {
