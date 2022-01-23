@@ -7,7 +7,7 @@ const HTTPSPopup = styled.div<{ $active: boolean }>`
     left: 0;
     width: 300px;
     height: fit-content;
-    background-color: #423f3f;
+    background-color: #2f343b;
     padding: 1rem;
     display: ${p => p.$active ? 'flex' : 'none'};
     flex-direction: column;

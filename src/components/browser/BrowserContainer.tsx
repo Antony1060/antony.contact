@@ -8,7 +8,7 @@ import SearchBar from "./elements/SearchBar";
 
 const BrowserContainer = styled.div`
     width: 100%;
-    background-color: #3a3838;
+    background-color: #282C32;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
@@ -18,7 +18,7 @@ const BrowserContainer = styled.div`
 `
 
 const BrowserContentContainer = styled.div`
-    background-color: #292727;
+    background-color: #171b20;
     min-height: 400px;
     padding: 1rem;
     transition: 200ms linear;

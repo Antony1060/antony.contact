@@ -6,7 +6,7 @@ const BoxButton = styled.button`
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #292727;
+    background-color: #171b20;
     cursor: pointer;
     border: none;
     font-size: 1rem;

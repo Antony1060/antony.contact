@@ -43,7 +43,7 @@ const ContactLineDetailsContainer = styled.div`
     justify-content: center;
     align-items: flex-start;
     padding: 1rem;
-    background-color: #423f3f;
+    background-color: #2f343b;
     color: white;
     z-index: 2;
     cursor: default;

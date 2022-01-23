@@ -22,7 +22,7 @@ const SearchContainer = styled.div`
 const BarContainer = styled.div`
     flex-grow: 1;
     height: 2rem;
-    background-color: #292727;
+    background-color: #171b20;
     display: flex;
     justify-content: flex-start;
     align-items: center;
