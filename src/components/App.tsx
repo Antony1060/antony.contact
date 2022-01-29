@@ -20,7 +20,6 @@ const ContentContainer = styled.div`
     max-width: 100vw;
     gap: 2rem;
     padding: 2rem;
-    text-align: center;
     text-align: start;
 `
 
