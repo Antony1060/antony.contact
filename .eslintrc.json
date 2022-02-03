@@ -1,0 +1,19 @@
+{
+    "parser": "@typescript-eslint/parser",
+    "parserOptions": {
+        "ecmaVersion": 2021
+    },
+    "extends": [
+        "plugin:antony/recommended"
+    ],
+    "ignorePatterns": [
+        "!**/*"
+    ],
+    "plugins": [
+        "antony"
+    ],
+    "env": {
+        "node": true
+    },
+    "rules": {}
+}
