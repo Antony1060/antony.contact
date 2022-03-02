@@ -37,7 +37,7 @@ type ContactLineDetailsProps = {
 const ContactLineDetailsContainer = styled.div`
     position: absolute;
     left: 0;
-    top: 1.6rem;
+    top: calc(100% - 2px);
     display: none;
     flex-direction: column;
     justify-content: center;
@@ -48,7 +48,7 @@ const ContactLineDetailsContainer = styled.div`
     z-index: 2;
     cursor: default;
     gap: 0.2rem;
-    width: 360px;
+    min-width: 360px;
     font-size: 1rem;
 
     &:hover {
