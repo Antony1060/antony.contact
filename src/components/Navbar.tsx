@@ -89,7 +89,7 @@ const Navbar = () => {
         <NavbarContainer>
             <NavbarContent>
                 <Logo>
-                    <LogoImage src={logo} />
+                    <LogoImage alt="Logo" src={logo} />
                     ~/contact
                 </Logo>
                 <Links>

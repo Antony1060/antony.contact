@@ -6,6 +6,7 @@
         "start": "parcel src/index.html --port 3000",
         "prebuild": "rm -rf dist/",
         "build": "COMMIT_REF=$(git show -s --format=%h) parcel build src/index.html",
+        "postbuild": "echo 'User-agent: *' > dist/robots.txt",
         "lint": "eslint -c .eslintrc.json --ext .ts ./src"
     },
     "browserslist": {

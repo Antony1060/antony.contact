@@ -81,7 +81,7 @@ const SearchBar: FC<SearchBarProps> = ({ contact, onRefresh }: SearchBarProps) =
 
     return (
         <SearchContainer>
-            <BoxButton disabled={!contact} onClick={onRefresh}>
+            <BoxButton aria-label="Reload" disabled={!contact} onClick={onRefresh}>
                 <FontAwesomeIcon icon={faRedo} size="sm" style={{ color: "rgba(255, 255, 255, 0.8)" }} />
             </BoxButton>
             <BarContainer>
