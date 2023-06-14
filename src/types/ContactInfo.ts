@@ -3,7 +3,7 @@ export type ContactInfoMetadata = {
         title: string;
     };
     twitter: {
-        followers: number;
+        followers?: number;
     };
     github: {
         contributions: number;

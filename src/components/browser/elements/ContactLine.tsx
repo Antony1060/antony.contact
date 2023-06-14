@@ -97,10 +97,10 @@ const ContactLine = ({ keyName, value, href, _metadata }: { keyName: keyof Conta
             title: "LinkedIn",
             description: `${_metadata.linkedIn.title}`
         },
-        twitter: {
+        twitter: _metadata.twitter.followers ? {
             title: "Twitter",
             description: `${_metadata.twitter.followers} followers`
-        },
+        } : undefined,
         github: {
             title: "GitHub",
             description: `${_metadata.github.contributions} contributions in the last year`
