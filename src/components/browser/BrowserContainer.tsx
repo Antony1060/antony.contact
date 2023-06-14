@@ -40,7 +40,7 @@ const LandspaceWarning = styled.div`
 const BrowserEmulator = () => {
     const [ contact, setContact ] = useState<ContactInfo | null>(null);
 
-    const fetchContacts = () => {
+    const fetchContact = () => {
         setContact(null);
         axios.get("https://antony.contact", {
             headers: {
@@ -49,11 +49,11 @@ const BrowserEmulator = () => {
         }).then(({ data }: { data: ContactInfo }) => setContact(data))
     }
 
-    useEffect(() => fetchContacts(), []);
+    useEffect(() => fetchContact(), []);
 
     return (
         <BrowserContainer>
-            <SearchBar contact={contact} onRefresh={fetchContacts} />
+            <SearchBar contact={contact} onRefresh={fetchContact} />
             <BrowserContentContainer>
                 {contact &&
                     <JsonFormat>

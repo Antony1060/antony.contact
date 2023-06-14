@@ -44,6 +44,8 @@ const PublicKey = styled.a`
     margin-left: 1rem;
     cursor: pointer;
     text-decoration: none;
+    font-family: monospace;
+    font-size: 0.96rem;
 
     &:hover {
         color: rgba(255, 255, 255, 0.9);
@@ -101,9 +103,8 @@ const SearchBar: FC<SearchBarProps> = ({ contact, onRefresh }: SearchBarProps) =
 
                         <span>SSH Key:</span>
                         <PublicKey href={sshKey}>
-                            SHA256: <br />
-                            CdyFKxQHvYw0y/l5uq4FFU <br />
-                            ipIPDLdKzGy/PV6Jv99sM
+                            e9:8e:1e:62:ff:92:8c:9e<br />
+                            41:7a:d6:bc:c3:18:ce:89
                         </PublicKey>
                     </HTTPSPopup>
                 </UrlBadge>
