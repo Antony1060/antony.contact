@@ -86,30 +86,30 @@ const ContactLineDetails: FC<ContactLineDetailsProps> = ({ title, description, d
     )
 }
 
-const ContactLine = ({ keyName, value, href, _metadata }: { keyName: keyof ContactInfo, value: string, href: string, _metadata: ContactInfoMetadata }) => {
+const ContactLine = ({ keyName, value, href, _metadata }: { keyName: keyof ContactInfo, value: string, href: string, _metadata: Partial<ContactInfoMetadata> }) => {
     const overwriteHref: { [k in keyof ContactInfo]?: string } = {
         mail: `mailto:${href}`,
         discord: "https://discord.gg/tgHWHWtNeD"
     }
 
     const linkDetails: { [key in keyof ContactInfo]?: ContactLineDetailsProps } = {
-        linkedIn: {
+        linkedIn: _metadata.linkedIn ? {
             title: "LinkedIn",
             description: `${_metadata.linkedIn.title}`
-        },
-        twitter: _metadata.twitter.followers ? {
+        } : undefined,
+        twitter: _metadata?.twitter?.followers ? {
             title: "Twitter",
             description: `${_metadata.twitter.followers} followers`
         } : undefined,
-        github: {
+        github: _metadata?.github ? {
             title: "GitHub",
             description: `${_metadata.github.contributions} contributions in the last year`
-        },
-        discord: {
+        } : undefined,
+        discord: _metadata?.discord ? {
             title: "Discord",
             descriptionImage: _metadata.discord.statusIcon,
             description: _metadata.discord.status
-        }
+        } : undefined
     }
 
     return (

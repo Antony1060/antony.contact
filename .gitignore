@@ -25,3 +25,5 @@ yarn-error.log*
 # parcel
 dist/
 .parcel-cache
+
+.idea
