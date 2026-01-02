@@ -89,7 +89,6 @@ const ContactLineDetails: FC<ContactLineDetailsProps> = ({ title, description, d
 const ContactLine = ({ keyName, value, href, _metadata }: { keyName: keyof ContactInfo, value: string, href: string, _metadata: Partial<ContactInfoMetadata> }) => {
     const overwriteHref: { [k in keyof ContactInfo]?: string } = {
         mail: `mailto:${href}`,
-        discord: "https://discord.gg/tgHWHWtNeD"
     }
 
     const linkDetails: { [key in keyof ContactInfo]?: ContactLineDetailsProps } = {
